@@ -1,10 +1,12 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.6rem;
-    position: relative;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+main {
+    margin: 32px;
 }
 
 #pokedex {
@@ -17,17 +19,29 @@ body {
 
 .pokemon-card {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 2rem;
-    width: calc(33.3% - 1rem);
+    flex-direction: column;
+    padding: 16px;
+    width: 300px;
     margin: 0 0.5rem 1rem 0.5rem;
     min-height: 150px;
     position: relative;
     overflow: hidden;
+    background-color: #46d1b0;;
     border-radius: 1rem;
     cursor: pointer;
-    transition: all 125ms ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.pokemon-card-top {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.pokemon-info-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .info-container {
@@ -40,6 +54,7 @@ body {
 
 .pokemon-header {
     border-bottom: 1px solid black;
+
 }
 
 .pokemon-header-inner {
@@ -50,4 +65,55 @@ body {
 
 .d-none {
     display: none;
+}
+
+#pokemon-id{
+    font-weight: bold;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.5) 
+}
+
+#pokemon-name {
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#pokemon-img {
+    height: 100x;
+    width: 100px;
+}
+
+.pokemon-info-left {
+    color: rgba(255, 255, 255) 
+}
+
+.type-info {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 4px;
+    margin-bottom: 3px;
+    border-radius: 6px;
+}
+
+.pokemon-card-body {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1em;
+}
+
+.pokemon-card-body::before {
+    content: '';
+    position: absolute;
+    width: 12rem;
+    height: 12rem;
+    background-image: url('./img/pokeball.png');
+    background-size: 100%;
+    opacity: 0.2;
+    right: -2rem;
+    bottom: -3rem;
+    transform: rotate(-30deg);
+}
+
+.img-container {
+    z-index: 1;
 }

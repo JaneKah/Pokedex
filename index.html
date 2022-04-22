@@ -13,23 +13,40 @@
 <body onload="loadPokemon()">
     <header class="pokemon-header">
         <div class="pokemon-header-inner">
-        <div>Pokemon</div>
-        <input type="text">
-    </div>
+            <div>Pokemon</div>
+            <input type="text">
+        </div>
     </header>
 
     <div class="pokedex-info-container d-none">
-        <div id="pokedex" class="pokemon-card">
-            <h1 id="pokemon-name">Name</h1>
+        <div id="pokedex" class="pokemon-info-card">
+            <h1 id="">Name</h1>
         </div>
         <div class="info-container">
-            <img id="pokemon-img" alt="">
+            <img id="" alt="">
         </div>
     </div>
 
-    <div class="pokedex-container">
+    <main>
 
-    </div>
+        <div class="pokedex-container">
+            <div class="pokemon-card">
+                <div class="pokemon-card-top">
+                <div id="pokemon-id">#1</div>
+            </div>
+            <div class="pokemon-card-body">
+                <div class="pokemon-info-left">
+                    <span id="pokemon-name">Bulbasaur</span>
+                    <span class="type-info">grass</span>
+                    <span class="type-info">poison</span>
+                </div>
+                <div class="img-container">
+                <img id="pokemon-img" alt="">
+            </div>
+            </div>
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
