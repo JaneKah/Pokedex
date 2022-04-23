@@ -52,15 +52,28 @@ main {
     margin-top: -40px;
 }
 
-.pokemon-header {
-    border-bottom: 1px solid black;
-
+header {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
-
 .pokemon-header-inner {
     display: flex;
     justify-content: space-between;
-    margin: 16px;
+    align-items: center;
+    margin: 0 16px;
+    padding: 0.5rem;
+}
+
+input {
+    width: 14rem;
+    height: 1rem;
+    padding: 0.5rem 0.8rem;
+    border: 0.2rem solid #D4C165;
+    border-radius: 0.3rem;
+    border-image:   linear-gradient(to right, #D4C165, #385BA9) 2;
+}
+
+.pokemon-logo img { 
+    height: 80px;
 }
 
 .d-none {
