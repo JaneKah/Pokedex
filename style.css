@@ -5,6 +5,27 @@ body {
     overflow-x: hidden;
 }
 
+:root {
+    --c-grass: #46d1b0;
+    --c-fire: #fc6c6c;
+    --c-water: #59acf8;
+    --c-bug: #a17973;
+    --c-normal: #A8A77A;
+    --c-poison: #7c538b;
+    --c-electric: #ffcf49;
+    --c-ground: #b0756d;
+    --c-fairy: #D685AD;
+    --c-fighting: #C22E28;
+    --c-psychic: #F95587;
+    --c-rock: #B6A136;
+    --c-ground: #E2BF65;
+    --c-ghost: #735797;
+    --c-ice: #96D9D6;
+    --c-dark: #705746;
+    --c-steel: #B7B7CE;
+    --c-dragon: #6F35FC;
+}
+
 main {
     margin: 32px;
 }
@@ -24,6 +45,7 @@ main {
     width: 300px;
     margin: 0 0.5rem 1rem 0.5rem;
     min-height: 150px;
+    max-height: 150px;
     position: relative;
     overflow: hidden;
     background-color: #46d1b0;;
@@ -110,8 +132,8 @@ input {
 }
 
 #pokemon-img {
-    height: 100x;
-    width: 100px;
+    height: 125px;
+    width: 125px;
 }
 
 .pokemon-info-left {
@@ -128,7 +150,6 @@ input {
 .pokemon-card-body {
     display: flex;
     justify-content: space-around;
-    margin-top: 1em;
 }
 
 .pokemon-card-body::before {
@@ -152,4 +173,10 @@ input {
     display: flex;
     flex-direction: column;
     text-align: center;
+}
+
+.pokedex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

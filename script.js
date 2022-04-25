@@ -1,5 +1,5 @@
 let currentPokemon;
-let pokemonLimit = 151;
+let pokemonLimit = 301;
 
 
 async function loadPokemon() {
@@ -23,7 +23,7 @@ function renderPokemonCards(i) {
         let changedPokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
 
 
-    document.getElementById('pokedex-container').innerHTML += `<div class="pokemon-card">
+    document.getElementById('pokedex-container').innerHTML += `<div class="pokemon-card" style="background-color: var(--c-${currentPokemon['types'][0]['type']['name']})" >
     <div class="pokemon-card-top">
         <div id="pokemon-id">#${i}</div>
     </div>
