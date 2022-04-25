@@ -1,22 +1,53 @@
 let currentPokemon;
-
+let pokemonLimit = 151;
 
 
 async function loadPokemon() {
-    let url = 'https://pokeapi.co/api/v2/pokemon/1';
+
+    for (let i = 1; i < pokemonLimit; i++) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
-    let currentPokemon = await response.json();
+    currentPokemon = await response.json();
     console.log('Loaded pokemon', currentPokemon);
-
-    renderPokemonInfo(currentPokemon);
-}
-
-function renderPokemonInfo(currentPokemon) {
-    let pokemonName = currentPokemon['name'];
-    let changedPokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-    document.getElementById('pokemon-name').innerHTML = changedPokemonName;
-    document.getElementById('pokemon-img').src = currentPokemon['sprites']['other']['dream_world']['front_default'];
+    renderPokemonCards(i);
+    }
+   
 }
 
 
-  
+
+function renderPokemonCards(i) {
+    
+        let img = currentPokemon['sprites']['other']['dream_world']['front_default'];
+        let pokemonName = currentPokemon['name'];
+        let changedPokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+
+
+    document.getElementById('pokedex-container').innerHTML += `<div class="pokemon-card">
+    <div class="pokemon-card-top">
+        <div id="pokemon-id">#${i}</div>
+    </div>
+    <div class="pokemon-card-body">
+        <div class="pokemon-info-left">
+            <span id="pokemon-name">${changedPokemonName}</span>
+            <div id="pokemon-type">
+            ${getPokemonTypes()}
+            </div>
+        </div>
+        <div class="img-container">
+            <img id="pokemon-img" src="${img}" alt="">
+        </div>
+    </div>
+</div>` 
+}
+
+function getPokemonTypes() {
+    let pokemonType = "";
+    for (i = 0; i < currentPokemon.types.length; i++) {
+        type = currentPokemon['types'][i]['type']['name'];
+        pokemonType += ` <span class="type-info">${type}</span>`;
+    }
+    return pokemonType;
+}
+
+
