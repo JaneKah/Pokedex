@@ -30,14 +30,6 @@ main {
     margin: 32px;
 }
 
-#pokedex {
-    min-height: 300px;
-    background-color: #FB6C6C;
-    color: white;
-    display: flex;
-    padding: 24px;
-}
-
 .pokemon-card {
     display: flex;
     flex-direction: column;
@@ -62,16 +54,7 @@ main {
 .pokemon-info-left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
-}
-
-.info-container {
-    background-color: white;
-    border-top-left-radius: 40px;
-    border-top-right-radius: 40px;
-    height: 100px;
-    margin-top: -40px;
 }
 
 header {
@@ -142,9 +125,10 @@ input {
 
 .type-info {
     background-color: rgba(255, 255, 255, 0.5);
-    padding: 4px;
+    padding: 4px 8px 4px 8px;
     margin-bottom: 3px;
     border-radius: 6px;
+    max-width: fit-content;
 }
 
 .pokemon-card-body {
@@ -169,7 +153,7 @@ input {
     z-index: 1;
 }
 
-#pokemon-type {
+.pokemon-type {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -179,4 +163,62 @@ input {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.pokedex-info-container {
+   min-width: 500px;  
+   border-radius: 60px; 
+   position: relative;
+}
+
+.dialog-bg {
+    background-color: rgba(255, 255, 255, 0.74);
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    backdrop-filter: blur(6px);
+}
+
+.info-container {
+    background-color: white;
+    border-radius: 40px;
+    height: 400px;
+    margin-top: -40px;
+}
+
+#pokemon-info-card {
+    min-height: 300px;
+    background-color: #FB6C6C;
+    color: white;
+    display: flex;
+    padding: 24px;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+    flex-direction: column;
+}
+
+.info-img img {
+    position: absolute;
+    right: 125px;
+    top: 150px;
+}
+
+.pokemon-card-body-info::before {
+    content: '';
+    position: absolute;
+    width: 12rem;
+    height: 12rem;
+    background-image: url('./img/pokeball.png');
+    background-size: 100%;
+    background-position: center;
+    opacity: 0.2;
+    right: -2rem;
+    bottom: -3rem;
+    transform: rotate(-30deg);
 }
