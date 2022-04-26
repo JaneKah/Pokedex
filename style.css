@@ -190,7 +190,7 @@ input {
     border-radius: 40px;
     height: 400px;
     margin-top: -40px;
-    padding-top: 2em;
+    padding: 2em;
 }
 
 .tabs {
@@ -242,6 +242,7 @@ input {
     top: 150px;
 }
 
+
 .pokemon-card-body-info::before {
     content: '';
     position: absolute;
@@ -251,8 +252,8 @@ input {
     background-size: 100%;
     background-position: center;
     opacity: 0.2;
-    right: -2rem;
-    bottom: -3rem;
+    right: 10rem;
+    bottom: 24rem;
     transform: rotate(-30deg);
 }
 

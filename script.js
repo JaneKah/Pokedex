@@ -11,7 +11,7 @@ async function loadPokemon() {
     console.log('Loaded pokemon', currentPokemon);
     renderPokemonCards(i);
     }
-   
+
 }
 
 
@@ -26,17 +26,17 @@ function renderPokemonCards(i) {
     document.getElementById('pokedex-container').innerHTML +=
     `<div class="pokemon-card" style="background-color: var(--c-${currentPokemon['types'][0]['type']['name']})" >
     <div class="pokemon-card-top">
-        <div id="pokemon-id">#${i}</div>
+        <div>#${i}</div>
     </div>
     <div class="pokemon-card-body">
         <div class="pokemon-info-left">
-            <span id="pokemon-name">${changedPokemonName}</span>
+            <span>${changedPokemonName}</span>
             <div class="pokemon-type">
             ${getPokemonTypes()}
             </div>
         </div>
         <div class="img-container">
-            <img id="pokemon-img" src="${img}" alt="">
+            <img src="${img}" alt="">
         </div>
     </div>
 </div>` 
@@ -50,5 +50,6 @@ function getPokemonTypes() {
     }
     return pokemonType;
 }
+
 
 
