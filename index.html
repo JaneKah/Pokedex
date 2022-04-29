@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
     <link rel="stylesheet" href="style.css">
+
     <script src="script.js"></script>
 </head>
 
@@ -29,7 +30,7 @@
                     <div class="pokemon-info-card-left">
                         <h1 id="pokemon-name"></h1>
                         <div id="pokemon-type" class="pokemon-type">
-                          <span></span>
+                            <span></span>
                         </div>
                     </div>
                     <div class="img-container info-img">
@@ -39,27 +40,31 @@
                 </div>
             </div>
             <div class="info-container">
-                <div class="info-container-inner">
-                    <div class="tabs">
-                        <div class="tab">
-                            About
-                        </div>
-                        <div class="tab">
-                            Base Stats
-                        </div>
+                <div class="tabs">
+                    <div class="tab">
+                        About
                     </div>
-                    <div class="info-card-body">
+                    <div class="tab">
+                        Base Stats
+                    </div>
+                </div>
+                <div class="info-container-inner">
+                    <div class="info-card-body d-none" id="about-info">
                         <div id="info-text" class="info-text">
                             Lorem ipsum am dignissimos eaque nulla eligendi!
                         </div>
                         <div class="height-weight-container">
                             <div class="box">
-                                <p><b>Height:</b></p>
-                                <p id="pokemon-height">10m</p>
+                                <div>
+                                    <span><b>Height:</b></span><br><br>
+                                    <span id="pokemon-height">10m</span>
+                                </div>
                             </div>
                             <div class="box">
-                                <p><b>Weight:</b></p>
-                                <p id="pokemon-weight">10kg</p>
+                                <div>
+                                    <p><b>Weight:</b></p>
+                                    <p id="pokemon-weight"></p>
+                                </div>
                             </div>
                         </div>
                         <div class="info-container-bottom">
@@ -67,6 +72,11 @@
                                 <p><b>Abilities:</b></p>
                                 <p id="pokemon-abilities"></p>
                             </div>
+                        </div>
+                    </div>
+                    <div class="info-card-body" id="base-stats-container">
+                        <div id="base-stats" class="stats">
+
                         </div>
                     </div>
                 </div>
