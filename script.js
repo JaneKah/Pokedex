@@ -1,5 +1,6 @@
 let currentPokemon;
-let pokemonLimit = 301;
+let currentSpecies;
+let pokemonLimit = 10;
 
 
 async function loadPokemon() {
@@ -11,9 +12,19 @@ async function loadPokemon() {
     console.log('Loaded pokemon', currentPokemon);
     renderPokemonCards(i);
     }
-
+    renderPokemonInfo(i);
 }
 
+
+async function loadPokemonInfo() {
+    for (let i = 1; i < pokemonLimit; i++) {
+        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}`;
+        let response = await fetch(url);
+        currentSpecies = await response.json();
+        console.log('Loaded pokemon', currentSpecies);
+        }
+    renderPokemonInfo(i);
+}
 
 
 function renderPokemonCards(i) {
@@ -52,4 +63,24 @@ function getPokemonTypes() {
 }
 
 
+function renderPokemonInfo(i) {
+    let pokemonName = currentPokemon['name'];
+    let changedPokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+    document.getElementById('pokemon-name').innerHTML = changedPokemonName;
+    document.getElementById('pokemon-id').innerHTML = '#'+ i;
+    document.getElementById('pokemon-type').innerHTML = getPokemonTypes();
+    document.getElementById('pokemon-height').innerHTML = currentPokemon.height/10 + " m";
+    document.getElementById('pokemon-weight').innerHTML = currentPokemon.weight/10 + " kg";
+    document.getElementById('pokemon-abilities').innerHTML = getAbilities();
+    document.getElementById('info-text').innerHTML = currentSpecies['flavor_text_entries'][6]['flavor_text'];
+}
 
+
+function getAbilities() {
+    let pokemonAbilities = "";
+    for (i = 0; i < currentPokemon.abilities.length; i++) {
+        ability = currentPokemon['abilities'][i]['ability']['name'];
+        pokemonAbilities += ` <span>${ability}<br></span>`;
+    }
+    return pokemonAbilities;
+}

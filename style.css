@@ -191,6 +191,7 @@ input {
     height: 400px;
     margin-top: -40px;
     padding: 2em;
+    max-width: 452px;
 }
 
 .tabs {
@@ -233,7 +234,8 @@ input {
     border-top-left-radius: 40px;
     border-top-right-radius: 40px;
     flex-direction: column;
-    max-width: 452px;
+    max-width: 468px;
+    min-width: 468px;
 }
 
 .info-img img {
@@ -258,7 +260,7 @@ input {
 }
 
 .info-text {
-    padding: 2em;
+    padding: 1em;
     text-align: center;
     word-break: break-word;
     max-width: 400px;
@@ -271,6 +273,7 @@ input {
 }
 
 .box {
+    padding-top: 1em;
     background-color: rgba(240, 233, 233, 0.274);
     width: 200px;
     height: 100px;
@@ -288,6 +291,7 @@ input {
 }
 
 .abilities-box {
+    padding-top: 1em;
     width: 300px;
     height: 100px;
     background-color: rgba(240, 233, 233, 0.274);

@@ -10,7 +10,7 @@
     <script src="script.js"></script>
 </head>
 
-<body onload="loadPokemon()">
+<body onload="loadPokemon(), loadPokemonInfo()">
     <!-- TO DO: fixing header-->
     <header class="pokemon-header">
         <div class="pokemon-header-inner">
@@ -28,8 +28,8 @@
                 <div class="pokemon-card-body-info">
                     <div class="pokemon-info-card-left">
                         <h1 id="pokemon-name"></h1>
-                        <div id="pokemon-type" class="pokemon-type type-info">
-                            <span class="type-design">fire</span>
+                        <div id="pokemon-type" class="pokemon-type">
+                          <span></span>
                         </div>
                     </div>
                     <div class="img-container info-img">
@@ -49,9 +49,8 @@
                         </div>
                     </div>
                     <div class="info-card-body">
-                        <div class="info-text">
+                        <div id="info-text" class="info-text">
                             Lorem ipsum am dignissimos eaque nulla eligendi!
-    
                         </div>
                         <div class="height-weight-container">
                             <div class="box">
@@ -65,7 +64,8 @@
                         </div>
                         <div class="info-container-bottom">
                             <div class="abilities-box">
-                                <p id="pokemon-abilities"><b>Abilities:</b></p>
+                                <p><b>Abilities:</b></p>
+                                <p id="pokemon-abilities"></p>
                             </div>
                         </div>
                     </div>
