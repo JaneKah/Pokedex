@@ -37,17 +37,17 @@ function renderPokemonCards(i) {
     document.getElementById('pokedex-container').innerHTML +=
         `<div class="pokemon-card" style="background-color: var(--c-${currentPokemon['types'][0]['type']['name']})" >
     <div class="pokemon-card-top">
-        <div>#${i}</div>
+        <div class="pokemon-id">#${i}</div>
     </div>
     <div class="pokemon-card-body">
         <div class="pokemon-info-left">
-            <span>${changedPokemonName}</span>
+            <span id="pokemon-name">${changedPokemonName}</span>
             <div class="pokemon-type">
             ${getPokemonTypes()}
             </div>
         </div>
         <div class="img-container">
-            <img src="${img}" alt="">
+            <img id="pokemon-img" src="${img}" alt="">
         </div>
     </div>
 </div>`
@@ -74,6 +74,8 @@ function renderPokemonInfo(i) {
     document.getElementById('pokemon-abilities').innerHTML = getAbilities();
     document.getElementById('info-text').innerHTML = currentSpecies['flavor_text_entries'][6]['flavor_text'];
     document.getElementById('base-stats').innerHTML = getBaseStats();
+    document.getElementById('info-img').src = currentPokemon['sprites']['other']['dream_world']['front_default'];
+    document.getElementById('pokemon-info-card').style = `background-color: var(--c-${currentPokemon['types'][0]['type']['name']})`
 }
 
 
@@ -108,6 +110,7 @@ function getBaseStats() {
     return statsContent;
 }
 
+
 function openBaseStats() {
     document.getElementById('about-tab').classList.remove('active');
     document.getElementById('about-tab').classList.add('inactive');
@@ -120,8 +123,13 @@ function openBaseStats() {
 
 function openInfoAbout() {
     document.getElementById('about-tab').classList.add('active');
+    document.getElementById('about-tab').classList.remove('inactive');
     document.getElementById('stats-tab').classList.add('inactive');
     document.getElementById('stats-tab').classList.remove('active');
     document.getElementById('base-stats-container').classList.add('d-none');
     document.getElementById('about-info').classList.remove('d-none');
+}
+
+function closeInfoCard() {
+    document.getElementById('info-card-container').style = "display: none";
 }

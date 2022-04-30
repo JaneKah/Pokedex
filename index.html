@@ -19,12 +19,12 @@
             <div class="input"><input type="text" placeholder="Find Pokemon"></div>
         </div>
     </header>
-    <div class="dialog-bg style">
+    <div id="info-card-container" class="dialog-bg style">
         <div class="pokedex-info-container">
             <div id="pokemon-info-card">
                 <div class="pokemon-info-card-top">
                     <div onclick="closeInfoCard()" class="arrow"><img src="./img/arrow.png" alt=""></div>
-                    <div id="pokemon-id"></div>
+                    <div class="pokemon-id" id="pokemon-id"></div>
                 </div>
                 <div class="pokemon-card-body-info">
                     <div class="pokemon-info-card-left">
@@ -33,9 +33,8 @@
                             <span></span>
                         </div>
                     </div>
-                    <div class="img-container info-img">
-                        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/4.svg"
-                            id="" alt="">
+                    <div class="info-img">
+                        <img src="" id="info-img" alt="">
                     </div>
                 </div>
             </div>
