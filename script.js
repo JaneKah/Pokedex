@@ -107,3 +107,21 @@ function getBaseStats() {
     }
     return statsContent;
 }
+
+function openBaseStats() {
+    document.getElementById('about-tab').classList.remove('active');
+    document.getElementById('about-tab').classList.add('inactive');
+    document.getElementById('stats-tab').classList.remove('inactive');
+    document.getElementById('stats-tab').classList.add('active');
+    document.getElementById('about-info').classList.add('d-none');
+    document.getElementById('base-stats-container').classList.remove('d-none');
+}
+
+
+function openInfoAbout() {
+    document.getElementById('about-tab').classList.add('active');
+    document.getElementById('stats-tab').classList.add('inactive');
+    document.getElementById('stats-tab').classList.remove('active');
+    document.getElementById('base-stats-container').classList.add('d-none');
+    document.getElementById('about-info').classList.remove('d-none');
+}

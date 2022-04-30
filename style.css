@@ -225,6 +225,15 @@ input {
 
 .tab:hover {
     border-bottom: 3px solid #D4C165;
+    color: black;
+}
+
+.active {
+    border-bottom: 3px solid #D4C165;
+}
+
+.inactive {
+    color: grey;
 }
 
 #pokemon-info-card {
@@ -270,7 +279,6 @@ input {
       transform: rotate(359deg);
     }
   }
-
 
 
 .info-text {

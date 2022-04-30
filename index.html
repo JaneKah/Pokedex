@@ -23,8 +23,8 @@
         <div class="pokedex-info-container">
             <div id="pokemon-info-card">
                 <div class="pokemon-info-card-top">
-                    <div class="arrow"><img src="./img/arrow.png" alt=""></div>
-                    <div id="pokemon-id">#4</div>
+                    <div onclick="closeInfoCard()" class="arrow"><img src="./img/arrow.png" alt=""></div>
+                    <div id="pokemon-id"></div>
                 </div>
                 <div class="pokemon-card-body-info">
                     <div class="pokemon-info-card-left">
@@ -41,15 +41,15 @@
             </div>
             <div class="info-container">
                 <div class="tabs">
-                    <div class="tab">
+                    <div onclick="openInfoAbout()" id="about-tab" class="tab active">
                         About
                     </div>
-                    <div class="tab">
+                    <div onclick="openBaseStats()" id="stats-tab" class="tab inactive">
                         Base Stats
                     </div>
                 </div>
                 <div class="info-container-inner">
-                    <div class="info-card-body d-none" id="about-info">
+                    <div class="info-card-body" id="about-info">
                         <div id="info-text" class="info-text">
                             Lorem ipsum am dignissimos eaque nulla eligendi!
                         </div>
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="info-card-body" id="base-stats-container">
+                    <div class="info-card-body d-none" id="base-stats-container">
                         <div id="base-stats" class="stats">
 
                         </div>
