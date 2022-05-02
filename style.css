@@ -99,7 +99,7 @@ input {
 }
 
 .d-none {
-    display: none;
+    display: none !important;
 }
 
 .pokemon-id {
@@ -248,12 +248,13 @@ input {
 
 
 .info-img {
-    position: absolute;
-    right: 173px;
-    top: 150px;
+    position: relative;
 }
 
 .info-img img {
+    position: absolute;
+    right: 140px;
+    top: -50px;
     height: 200px;
 }
 
@@ -261,13 +262,13 @@ input {
 .pokemon-card-body-info::before {
     content: '';
     position: absolute;
-    width: 12rem;
-    height: 12rem;
-    background-image: url('./img/pokeball.png');
+    width: 15rem;
+    height: 15rem;
+    background-image: url(./img/pokeball.png);
     background-size: 100%;
     background-position: center;
     opacity: 0.2;
-    right: 158px;
+    right: 132px;
     bottom: 461px;
     transform: rotate(-30deg);
     animation: rotation 6s infinite linear;
@@ -377,4 +378,8 @@ input {
 .inline {
     display: flex;
     align-items: center;
+}
+
+.stats-name {
+    color: #c4b051;
 }
