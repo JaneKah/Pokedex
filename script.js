@@ -90,10 +90,20 @@ function renderPokemonInfo(i) {
     document.getElementById('pokemon-abilities').innerHTML = loadAbilities();
     document.getElementById('info-text').innerHTML = allPokomonsSpeciesData[i]['flavor_text_entries'][6]['flavor_text'];
     document.getElementById('base-stats').innerHTML = getBaseStats();
+    loadPreviousImage(i);
+    document.getElementById('next-img').src = allPokemonsData[i+2]['sprites']['other']['dream_world']['front_default'];
     document.getElementById('info-img').src = allPokemonsData[i]['sprites']['other']['dream_world']['front_default'];
     document.getElementById('pokemon-info-card').style = `background-color: var(--c-${allPokemonsData[i]['types'][0]['type']['name']})`
 }
 
+
+
+function loadPreviousImage(i) {
+    for (i = 0; i < allPokemonsData[i].length; i++) {
+        previousImg = allPokemonsData[i]['sprites']['other']['dream_world']['front_default'];
+        document.getElementById('previous-img').src = `${previousImg}`;
+    }
+}
 
 function loadAbilities() {
     let abilities = "";

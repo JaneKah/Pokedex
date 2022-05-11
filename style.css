@@ -169,6 +169,7 @@ input {
     min-width: 500px;
     border-radius: 60px;
     position: relative;
+    overflow: hidden;
 }
 
 .dialog-bg {
@@ -249,15 +250,32 @@ input {
 
 .info-img {
     position: relative;
+   
 }
 
 .info-img img {
     position: absolute;
     right: 140px;
-    top: -50px;
+    top: -190px;
     height: 200px;
+    top: -50px;
 }
 
+#next-img  {
+    right: -80px;
+    top: 110px;
+    height: 100px;
+    filter: brightness(20%);
+    position: absolute;
+}
+
+#previous-img {
+    top: 110px;
+    height: 100px;
+    filter: brightness(20%);
+    position: absolute;
+    left: -90px;
+}
 
 .pokemon-card-body-info::before {
     content: '';
@@ -272,6 +290,14 @@ input {
     bottom: 461px;
     transform: rotate(-30deg);
     animation: rotation 6s infinite linear;
+}
+
+.pokemon-card-body-info {
+    position: relative;
+}
+
+.dark-img-box {
+    position: relative;
 }
 
 @keyframes rotation {
