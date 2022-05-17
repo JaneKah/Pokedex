@@ -5,7 +5,6 @@ let pokemonLimit = 10;
 let allPokemonsData = [];
 let allPokomonsSpeciesData = [];
 let allPokemonsDataInfo = [];
-let pokemonNameInfo;
 
 async function loadPokemon() {
 
@@ -75,7 +74,7 @@ function getPokemonTypes(i) {
     let types = allPokemonsDataInfo[i].types;
     let pokemonType = "";
     for (i = 0; i < types.length; i++) {
-        type = types[i]['type']['name'];
+        type = allPokemonsDataInfo[i]['types'][i]['type']['name'];
         pokemonType += ` <span class="type-info">${type}</span>`;
     }
     return pokemonType;
@@ -83,76 +82,53 @@ function getPokemonTypes(i) {
 
 
 function renderPokemonInfo(i) {
-    i = i - 1;
-    pokemonNameInfo = allPokemonsDataInfo[i]['name'];
-    let changedPokemonName = pokemonNameInfo.charAt(0).toUpperCase() + pokemonNameInfo.slice(1);
+  
+    let pokemonName = allPokemonsDataInfo[i]['name'];
+    let changedPokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
     document.getElementById('pokemon-name').innerHTML = changedPokemonName;
     document.getElementById('pokemon-id').innerHTML = '#' + Number(i+1);
     document.getElementById('pokemon-type-info').innerHTML = getPokemonTypes(i);
     document.getElementById('pokemon-height').innerHTML = allPokemonsDataInfo[i].height / 10 + " m";
     document.getElementById('pokemon-weight').innerHTML = allPokemonsDataInfo[i].weight / 10 + " kg";
-    document.getElementById('pokemon-abilities').innerHTML = loadAbilities(i);
+    document.getElementById('pokemon-abilities').innerHTML = loadAbilities();
     document.getElementById('info-text').innerHTML = allPokomonsSpeciesData[i]['flavor_text_entries'][6]['flavor_text'];
     document.getElementById('base-stats').innerHTML = getBaseStats(i);
     document.getElementById('pokemon-info-card').style = `background-color: var(--c-${allPokemonsDataInfo[i]['types'][0]['type']['name']})`;
+    loadImages(i);
 }
-
 
 function loadImages(i) {
-    document.getElementById('info-img').src = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
-    showNextImage(i);
-    showPreviousImage(i);
+    document.getElementById('previous-img').src = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
+    document.getElementById('next-img').src = allPokemonsDataInfo[i+1]['sprites']['other']['dream_world']['front_default'];
+    document.getElementById('info-img').src = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
 }
 
 
-function showNextImage(i) {
-    let nextImage = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
-    let firstImage = allPokemonsDataInfo[0]['sprites']['other']['dream_world']['front_default'];
-    if (i < allPokemonsDataInfo.length - 1) {
-        document.getElementById('next-img').src = nextImage;
-    } else {
-        document.getElementById('next-img').src = firstImage;
-    }
-}
-
-
-function showPreviousImage(i) {
-    let previousImage = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
-    let lastPicture = allPokemonsDataInfo[allPokemonsDataInfo.length - 1]['sprites']['other']['dream_world']['front_default'];
-    if (i > 0) {
-        document.getElementById('previous-img').src = previousImage;
-    } else {
-        document.getElementById('previous-img').src = lastPicture;
-    }
-}
-
-
-function loadAbilities(i) {
+function loadAbilities() {
     let abilities = "";
-    let abilitiesInfo = allPokemonsDataInfo[i].abilities;
-    for (i = 0; i < abilitiesInfo.length; i++) {
-        ability = abilitiesInfo[i]['ability']['name'];
+    let abilitiesLength = allPokemonsDataInfo[i].abilities;
+    for (i = 0; i < abilitiesLength.length; i++) {
+        ability = allPokemonsDataInfo[i]['abilities'][i]['ability']['name'];
         abilities += ` <span>${ability}<br></span>`;
     }
     return abilities;
 }
 
 
-function getBaseStats(i) {
-    let stats = allPokemonsDataInfo[i].stats;
+function getBaseStats() {
     let statsNames = ['HP', 'Attack', 'Defense', 'Sp. Atk.', 'Sp. Def.', 'Speed'];
     let statsContent = "";
-    for (let i = 0; i < stats.length; i++) {
+    for (let i = 0; i < allPokemonsDataInfo[i].stats.length; i++) {
         statsContent += `
             <div class="stats-names">
                 <div class="inline">
                 <div style="min-width: 100px;">
                 <b class="stats-name">${statsNames[i]} </b>
                 </div>
-                <div style="min-width: 35px;"><span><b> ${stats[i].base_stat}</b></span>
+                <div style="min-width: 35px;"><span><b> ${allPokemonsDataInfo[i].stats[i].base_stat}</b></span>
                 </div> 
                 <div class="progress">
-                <span class="progress-bar" style="width: ${stats[i].base_stat / 2}%"></span>
+                <span class="progress-bar" style="width: ${allPokemonsDataInfo[i].stats[i].base_stat / 2}%"></span>
               </div>
               </div>
             </div>
@@ -188,7 +164,6 @@ function closeInfoCard() {
 
 
 function openInfoCard(i) {
-    renderPokemonInfo(i);
-    loadImages(i);
+    loadPokemonInfo(i);
     document.getElementById(`info-card-container`).classList.remove('d-none');
 }
