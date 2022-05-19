@@ -94,7 +94,7 @@ function renderPokemonInfo(i) {
     document.getElementById('info-text').innerHTML = allPokomonsSpeciesData[i]['flavor_text_entries'][6]['flavor_text'];
     document.getElementById('base-stats').innerHTML = getBaseStats(i);
     document.getElementById('pokemon-info-card').style = `background-color: var(--c-${allPokemonsDataInfo[i]['types'][0]['type']['name']})`;
-    loadImages(i);
+   
 }
 
 function loadImages(i) {
@@ -165,5 +165,6 @@ function closeInfoCard() {
 
 function openInfoCard(i) {
     loadPokemonInfo(i);
+    loadImages(i);
     document.getElementById(`info-card-container`).classList.remove('d-none');
 }

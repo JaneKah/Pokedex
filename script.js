@@ -6,24 +6,27 @@ let allPokemonsData = [];
 let allPokomonsSpeciesData = [];
 let allPokemonsDataInfo = [];
 let pokemonNameInfo;
+let id;
 
 async function loadPokemon() {
 
-    for (let i = 1; i < pokemonLimit; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    for (let i = 0; i < pokemonLimit; i++) {
+        id = i + 1;
+        let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
         console.log('Loaded pokemon', currentPokemon);
-        renderPokemonCards(i);
+        renderPokemonCards(id, i);
         allPokemonsData.push(currentPokemon);
     }
 }
 
 
-async function loadPokemonInfo(i) {
-    for (let i = 1; i < pokemonLimit; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon-species/${i}`;
-        let secondUrl = `https://pokeapi.co/api/v2/pokemon/${i}`;
+async function loadPokemonInfo() {
+    for (let i = 0; i < pokemonLimit; i++) {
+        id = i + 1;
+        let url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+        let secondUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
         let response = await fetch(url);
         let secondResponse = await fetch(secondUrl);
         currentSpecies = await response.json();
@@ -34,8 +37,22 @@ async function loadPokemonInfo(i) {
     renderPokemonInfo(i);
 }
 
+/*
+async function loadPokemonInfoForImages(i) {
+    for (let i = 0; i < pokemonLimit; i++) {
+        let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+        let response = await fetch(url);
 
-function renderPokemonCards(i) {
+        currentPokemonForImg = await response.json();
+        currentPokemonInfo = await secondResponse.json();
+        allPokomonsSpeciesData.push(currentSpecies);
+        allPokemonsDataInfo.push(currentPokemonInfo);
+    }
+    renderPokemonInfo(i);
+}
+*/
+
+function renderPokemonCards(id, i) {
 
     let img = currentPokemon['sprites']['other']['dream_world']['front_default'];
     let pokemonName = currentPokemon['name'];
@@ -44,7 +61,7 @@ function renderPokemonCards(i) {
     document.getElementById('pokedex-container').innerHTML +=
         `<div onclick="openInfoCard(${i})" class="pokemon-card" style="background-color: var(--c-${currentPokemon['types'][0]['type']['name']})" >
     <div class="pokemon-card-top">
-        <div class="pokemon-id">#${i}</div>
+        <div class="pokemon-id">#${id}</div>
     </div>
     <div class="pokemon-card-body">
         <div class="pokemon-info-left">
@@ -83,7 +100,6 @@ function getPokemonTypes(i) {
 
 
 function renderPokemonInfo(i) {
-    i = i - 1;
     pokemonNameInfo = allPokemonsDataInfo[i]['name'];
     let changedPokemonName = pokemonNameInfo.charAt(0).toUpperCase() + pokemonNameInfo.slice(1);
     document.getElementById('pokemon-name').innerHTML = changedPokemonName;
@@ -99,33 +115,51 @@ function renderPokemonInfo(i) {
 
 
 function loadImages(i) {
-    document.getElementById('info-img').src = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
+    
+        document.getElementById('info-img').src = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
+    
     showNextImage(i);
     showPreviousImage(i);
 }
 
 
 function showNextImage(i) {
-    let nextImage = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
     let firstImage = allPokemonsDataInfo[0]['sprites']['other']['dream_world']['front_default'];
     if (i < allPokemonsDataInfo.length - 1) {
-        document.getElementById('next-img').src = nextImage;
-    } else {
+        document.getElementById('next-img').src = allPokemonsDataInfo[i+1]['sprites']['other']['dream_world']['front_default'];
+    } else if (i = allPokemonsDataInfo.length - 1) {
         document.getElementById('next-img').src = firstImage;
     }
 }
 
 
 function showPreviousImage(i) {
-    let previousImage = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
     let lastPicture = allPokemonsDataInfo[allPokemonsDataInfo.length - 1]['sprites']['other']['dream_world']['front_default'];
     if (i > 0) {
-        document.getElementById('previous-img').src = previousImage;
-    } else {
+        document.getElementById('previous-img').src = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
+    } else if (i = 0) {
         document.getElementById('previous-img').src = lastPicture;
     }
 }
 
+/*
+function showPreviousPokemon(i) {
+    if (i > 0) {
+        renderPokemonInfo(i-1);
+    } else {
+        renderPokemonInfo(allPokemonsDataInfo.length - 1);
+    }
+}
+
+
+function showNextPokemon(i) {
+    if (i < allPokemonsDataInfo.length - 1) {
+        renderPokemonInfo(i + 1);
+    } else {
+        renderPokemonInfo(0);
+    }
+}
+*/ 
 
 function loadAbilities(i) {
     let abilities = "";
