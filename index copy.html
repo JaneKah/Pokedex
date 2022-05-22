@@ -11,7 +11,7 @@
     <script src="script.js"></script>
 </head>
 
-<body onload="loadPokemon(), loadPokemonInfo()">
+<body onload="loadPokemon(), loadPokemonInfo(), generateHTML()">
     <!-- TO DO: fixing header-->
     <header class="pokemon-header">
         <div class="pokemon-header-inner">
@@ -33,7 +33,7 @@
                             <span></span>
                         </div>
                     </div>
-                    <img id="previous-img" onclick="showPreviousPokemon(i)"
+                    <img id="previous-img" 
                         src=""
                         alt="">
                     <img id="next-img" onclick="showNextPokemon(i)"

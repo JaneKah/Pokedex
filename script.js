@@ -16,7 +16,7 @@ async function loadPokemon() {
         let response = await fetch(url);
         currentPokemon = await response.json();
         console.log('Loaded pokemon', currentPokemon);
-        renderPokemonCards(id, i);
+        renderPokemonCards(i, id);
         allPokemonsData.push(currentPokemon);
     }
 }
@@ -37,22 +37,7 @@ async function loadPokemonInfo() {
     renderPokemonInfo(i);
 }
 
-/*
-async function loadPokemonInfoForImages(i) {
-    for (let i = 0; i < pokemonLimit; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-        let response = await fetch(url);
-
-        currentPokemonForImg = await response.json();
-        currentPokemonInfo = await secondResponse.json();
-        allPokomonsSpeciesData.push(currentSpecies);
-        allPokemonsDataInfo.push(currentPokemonInfo);
-    }
-    renderPokemonInfo(i);
-}
-*/
-
-function renderPokemonCards(id, i) {
+function renderPokemonCards(i, id) {
 
     let img = currentPokemon['sprites']['other']['dream_world']['front_default'];
     let pokemonName = currentPokemon['name'];
@@ -127,7 +112,7 @@ function showNextImage(i) {
     let firstImage = allPokemonsDataInfo[0]['sprites']['other']['dream_world']['front_default'];
     if (i < allPokemonsDataInfo.length - 1) {
         document.getElementById('next-img').src = allPokemonsDataInfo[i+1]['sprites']['other']['dream_world']['front_default'];
-    } else if (i = allPokemonsDataInfo.length - 1) {
+    } else if (i == allPokemonsDataInfo.length - 1) {
         document.getElementById('next-img').src = firstImage;
     }
 }
@@ -137,29 +122,30 @@ function showPreviousImage(i) {
     let lastPicture = allPokemonsDataInfo[allPokemonsDataInfo.length - 1]['sprites']['other']['dream_world']['front_default'];
     if (i > 0) {
         document.getElementById('previous-img').src = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
-    } else if (i = 0) {
+    } else if (i == 0) {
         document.getElementById('previous-img').src = lastPicture;
     }
 }
 
-/*
+
 function showPreviousPokemon(i) {
     if (i > 0) {
-        renderPokemonInfo(i-1);
+        openInfoCard(i - 1);
     } else {
-        renderPokemonInfo(allPokemonsDataInfo.length - 1);
+        openInfoCard(allPokemonsDataInfo.length - 1);
     }
+
 }
 
 
 function showNextPokemon(i) {
     if (i < allPokemonsDataInfo.length - 1) {
-        renderPokemonInfo(i + 1);
-    } else {
-        renderPokemonInfo(0);
+        openInfoCard(i + 1);
+    } else if (i == allPokemonsDataInfo.length - 1) {
+        openInfoCard(0);
     }
 }
-*/ 
+
 
 function loadAbilities(i) {
     let abilities = "";
@@ -222,7 +208,83 @@ function closeInfoCard() {
 
 
 function openInfoCard(i) {
+    generateHTML(i);
     renderPokemonInfo(i);
     loadImages(i);
     document.getElementById(`info-card-container`).classList.remove('d-none');
+}
+
+
+function generateHTML(i) {
+    let infoCard = document.getElementById('info-card-container');
+    infoCard.innerHTML = `
+    <div class="pokedex-info-container">
+            <div id="pokemon-info-card">
+                <div class="pokemon-info-card-top">
+                    <div onclick="closeInfoCard()" class="arrow"><img src="./img/arrow.png" alt=""></div>
+                    <div class="pokemon-id" id="pokemon-id"></div>
+                </div>
+                <div class="pokemon-card-body-info">
+                    <div class="pokemon-info-card-left">
+                        <h1 id="pokemon-name"></h1>
+                        <div id="pokemon-type-info" class="pokemon-type">
+                            <span></span>
+                        </div>
+                    </div>
+                    <img id="previous-img"  onclick="showPreviousPokemon(${i})"
+                        src=""
+                        alt="">
+                    <img id="next-img" onclick="showNextPokemon(${i})"
+                        src=""
+                        alt="">
+                    <div class="info-img ">
+                        <img src="" id="info-img" alt="">
+                    </div>
+
+                </div>
+            </div>
+            <div class="info-container">
+                <div class="tabs">
+                    <div onclick="openInfoAbout()" id="about-tab" class="tab active">
+                        About
+                    </div>
+                    <div onclick="openBaseStats()" id="stats-tab" class="tab inactive">
+                        Base Stats
+                    </div>
+                </div>
+                <div class="info-container-inner">
+                    <div class="info-card-body" id="about-info">
+                        <div id="info-text" class="info-text">
+                            Lorem ipsum am dignissimos eaque nulla eligendi!
+                        </div>
+                        <div class="height-weight-container">
+                            <div class="box">
+                                <div>
+                                    <span><b>Height:</b></span><br><br>
+                                    <span id="pokemon-height">10m</span>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div>
+                                    <p><b>Weight:</b></p>
+                                    <p id="pokemon-weight"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="info-container-bottom">
+                            <div class="abilities-box">
+                                <p><b>Abilities:</b></p>
+                                <p id="pokemon-abilities"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card-body d-none" id="base-stats-container">
+                        <div id="base-stats" class="stats">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
 }

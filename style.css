@@ -409,3 +409,7 @@ input {
 .stats-name {
     color: #c4b051;
 }
+
+#previous-img, #next-img {
+    cursor: pointer;
+}
