@@ -43,6 +43,7 @@ main {
     border-radius: 1rem;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    transition: 2s ease-in-out
 }
 
 .pokemon-card-top {
@@ -250,31 +251,30 @@ input {
 
 .info-img {
     position: relative;
-   
+    
 }
 
 .info-img img {
     position: absolute;
     right: 140px;
-    top: -190px;
-    height: 200px;
     top: -50px;
+    height: 200px;
 }
 
 #next-img  {
-    right: -80px;
-    top: 110px;
+    right: -45px;
+    top: 183px;
     height: 100px;
     filter: brightness(20%);
     position: absolute;
 }
 
 #previous-img {
-    top: 110px;
+    top: 183px;
     height: 100px;
     filter: brightness(20%);
     position: absolute;
-    left: -90px;
+    left: -60px;
 }
 
 .pokemon-card-body-info::before {
@@ -292,14 +292,6 @@ input {
     animation: rotation 6s infinite linear;
 }
 
-.pokemon-card-body-info {
-    position: relative;
-}
-
-.dark-img-box {
-    position: relative;
-}
-
 @keyframes rotation {
     from {
       transform: rotate(0deg);
@@ -307,6 +299,10 @@ input {
     to {
       transform: rotate(359deg);
     }
+}
+
+.dark-img-box {
+    position: relative;
 }
 
 .info-text {
@@ -412,4 +408,56 @@ input {
 
 #previous-img, #next-img {
     cursor: pointer;
+    transition: all 225ms ease-in-out;
 }
+
+#previous-img:hover {
+    filter: brightness(50%);
+    transform: translateX(25%);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+#next-img:hover {
+    filter: brightness(50%);
+    transform: translateX(-25%);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+
+/*
+.next-img {
+    filter: brightness(50%);
+    transition: ease-in-out 5s;
+    animation: change-pokemon ease-in-out 5s;
+}
+
+@keyframes change-pokemon {
+    0% {
+        transform: translate();
+        height: 100px;
+    }
+
+    25% {
+        transform: translate(-34px, -19px);
+        height: 125px;
+    }
+
+    50% {
+        transform: translate(-85px, -32px);
+        height: 150px;
+    }
+
+    75% {
+        transform: translate(-127px, -38px);
+        height: 175px;
+    }
+
+    100% {
+        transform: translate(-222px, -66px);
+        height: 200px;
+    
+    }
+    
+} */

@@ -101,7 +101,7 @@ function renderPokemonInfo(i) {
 
 function loadImages(i) {
     
-        document.getElementById('info-img').src = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
+    document.getElementById('info-img').src = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
     
     showNextImage(i);
     showPreviousImage(i);
@@ -134,7 +134,6 @@ function showPreviousPokemon(i) {
     } else {
         openInfoCard(allPokemonsDataInfo.length - 1);
     }
-
 }
 
 
@@ -145,6 +144,13 @@ function showNextPokemon(i) {
         openInfoCard(0);
     }
 }
+
+
+/* 
+function transformPokemon() {
+    document.getElementById('next-img').className = 'next-img';
+}
+*/
 
 
 function loadAbilities(i) {
