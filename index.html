@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="script.js"></script>
+    <script src="search.js"></script>
 </head>
 
 <body onload="loadPokemon(), loadPokemonInfo()">
@@ -16,7 +17,7 @@
     <header class="pokemon-header">
         <div class="pokemon-header-inner">
             <div class="pokemon-logo"><img src="./img/pokemon-logo.png" alt=""></div>
-            <div class="input"><input type="text" placeholder="Find Pokemon"></div>
+            <div class="input"><input type="text" id="search" onchange="searchPokemon()" placeholder="Find Pokemon"></div>
         </div>
     </header>
     <div id="info-card-container" class="dialog-bg d-none">

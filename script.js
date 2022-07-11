@@ -5,11 +5,11 @@ let pokemonLimit = 10;
 let allPokemonsData = [];
 let allPokomonsSpeciesData = [];
 let allPokemonsDataInfo = [];
+let pokemonNames = [];
 let pokemonNameInfo;
 let id;
 
 async function loadPokemon() {
-
     for (let i = 0; i < pokemonLimit; i++) {
         id = i + 1;
         let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -18,6 +18,7 @@ async function loadPokemon() {
         console.log('Loaded pokemon', currentPokemon);
         renderPokemonCards(i, id);
         allPokemonsData.push(currentPokemon);
+        pokemonNames.push(currentPokemon.name);
     }
 }
 
@@ -61,6 +62,9 @@ function renderPokemonCards(i, id) {
     </div>
 </div>`
 }
+
+
+
 
 
 function loadPokemonTypes() {
@@ -219,6 +223,9 @@ function openInfoCard(i) {
     loadImages(i);
     document.getElementById(`info-card-container`).classList.remove('d-none');
 }
+
+
+
 
 
 function generateHTML(i) {
