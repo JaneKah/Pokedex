@@ -26,10 +26,6 @@ body {
     --c-dragon: #6F35FC;
 }
 
-main {
-    margin: 32px;
-}
-
 .pokemon-card {
     display: flex;
     flex-direction: column;
@@ -259,7 +255,7 @@ input {
 
 .info-img {
     position: relative;
-    
+
 }
 
 .info-img img {
@@ -270,7 +266,7 @@ input {
     z-index: 2;
 }
 
-#next-img  {
+#next-img {
     right: -45px;
     top: 183px;
     height: 100px;
@@ -303,10 +299,11 @@ input {
 
 @keyframes rotation {
     from {
-      transform: rotate(0deg);
+        transform: rotate(0deg);
     }
+
     to {
-      transform: rotate(359deg);
+        transform: rotate(359deg);
     }
 }
 
@@ -470,3 +467,98 @@ input {
     }
     
 } */
+
+
+@media (max-width: 777px) {
+    .pokemon-card {
+        width: calc(40% - 1rem);
+    }
+}
+
+@media (max-width: 670px) {
+    .pokemon-card {
+        width: calc(80% - 1rem);
+    }
+}
+
+@media (max-width: 555px) {
+    input {
+        width: auto;
+    }
+
+    .pokemon-header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 16px 16px;
+        padding: 0.5rem;
+        flex-direction: column;
+    }
+
+    .pokemon-logo img {
+        padding-bottom: 16px;
+    }
+
+    .pokedex-container {
+        margin-top: 13em;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+    .pokedex-info-container {
+        min-width: 100%;
+        border-radius: 0px;
+    }
+
+    #pokemon-info-card {
+        min-width: 0px;
+        position: relative;
+    }
+
+    .info-img img {
+        right: 75px;
+        top: 0px;
+        height: 149px;
+    }
+
+    .info-text {
+        padding: 1em;
+        max-width: 357px;
+    }
+
+    .box {
+        width: 140px;
+        height: 45px;
+
+    }
+
+    .info-container {
+        width: none;
+    }
+
+    .progress {
+        width: 130%;
+        min-width: 130%;
+    }
+
+    .stats {
+        width: 200px;
+        height: 285px;
+    }
+
+    .pokemon-card-body-info::before {
+        right: 66px;
+        bottom: 0px;
+    }
+
+    .abilities-box {
+        height: 57px;
+        padding: 5px;
+    }
+
+    .info-container-inner {
+        align-items: unset;
+    }
+}

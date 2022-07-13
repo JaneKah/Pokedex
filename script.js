@@ -16,7 +16,7 @@ async function loadPokemon() {
         let response = await fetch(url);
         currentPokemon = await response.json();
         console.log('Loaded pokemon', currentPokemon);
-        renderPokemonCards(i, id);
+        renderPokemonCards(i);
         allPokemonsData.push(currentPokemon);
         pokemonNames.push(currentPokemon.name);
     }
@@ -38,8 +38,8 @@ async function loadPokemonInfo() {
     renderPokemonInfo(i);
 }
 
-function renderPokemonCards(i, id) {
-
+function renderPokemonCards(i) {
+    let id = i + 1;
     let img = currentPokemon['sprites']['other']['dream_world']['front_default'];
     let pokemonName = currentPokemon['name'];
     let changedPokemonName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
@@ -62,8 +62,6 @@ function renderPokemonCards(i, id) {
     </div>
 </div>`
 }
-
-
 
 
 
@@ -225,9 +223,6 @@ function openInfoCard(i) {
 }
 
 
-
-
-
 function generateHTML(i) {
     let infoCard = document.getElementById('info-card-container');
     infoCard.innerHTML = `
@@ -273,21 +268,21 @@ function generateHTML(i) {
                         <div class="height-weight-container">
                             <div class="box">
                                 <div>
-                                    <span><b>Height:</b></span><br><br>
+                                    <span><b>Height:</b></span><br>
                                     <span id="pokemon-height">10m</span>
                                 </div>
                             </div>
                             <div class="box">
                                 <div>
-                                    <p><b>Weight:</b></p>
-                                    <p id="pokemon-weight"></p>
+                                    <span><b>Weight:</b></span><br>
+                                    <span id="pokemon-weight"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="info-container-bottom">
                             <div class="abilities-box">
-                                <p><b>Abilities:</b></p>
-                                <p id="pokemon-abilities"></p>
+                                <b>Abilities:</b><br>
+                                <span id="pokemon-abilities"></span>
                             </div>
                         </div>
                     </div>

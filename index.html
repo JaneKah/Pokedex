@@ -17,7 +17,7 @@
     <header class="pokemon-header">
         <div class="pokemon-header-inner">
             <div class="pokemon-logo"><img src="./img/pokemon-logo.png" alt=""></div>
-            <div class="input"><input type="text" id="search" onchange="searchPokemon()" placeholder="Find Pokemon"></div>
+            <div class="input"><input type="text" id="search" onclick="showCloseButton()" onchange="searchPokemon()" placeholder="Find Pokemon"></div>
         </div>
     </header>
     <div id="info-card-container" class="dialog-bg d-none">
@@ -76,8 +76,8 @@
                         </div>
                         <div class="info-container-bottom">
                             <div class="abilities-box">
-                                <p><b>Abilities:</b></p>
-                                <p id="pokemon-abilities"></p>
+                                <span><b>Abilities:</b></span><br>
+                                <span id="pokemon-abilities"></span>
                             </div>
                         </div>
                     </div>
