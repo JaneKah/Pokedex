@@ -1,16 +1,22 @@
 let currentPokemon;
 let currentPokemonInfo;
 let currentSpecies;
-let pokemonLimit = 10;
+let pokemonLimit;
 let allPokemonsData = [];
 let allPokomonsSpeciesData = [];
 let allPokemonsDataInfo = [];
 let pokemonNames = [];
 let pokemonNameInfo;
 let id;
+let startNumber = 0;
+let limit = 30;
+let offset = 0;
+let scrollToLoad = true;
+let maxPokemonCount = 90;
 
 async function loadPokemon() {
-    for (let i = 0; i < pokemonLimit; i++) {
+    pokemonLimit = 30;
+    for (let i = startNumber; i < pokemonLimit; i++) {
         id = i + 1;
         let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
         let response = await fetch(url);
@@ -20,11 +26,31 @@ async function loadPokemon() {
         allPokemonsData.push(currentPokemon);
         pokemonNames.push(currentPokemon.name);
     }
+    window.addEventListener('scroll', ScrollToMorePokemons);
+}
+
+
+let ScrollToMorePokemons = async () => {
+    if (window.scrollY + window.innerHeight >= document.body.clientHeight) {
+        if (pokemonLimit == maxPokemonCount) {
+            removeEventListener('scroll', ScrollToMorePokemons);
+            return;
+        }
+        for (i = pokemonLimit; i < pokemonLimit + 30; i++) {
+            id = i + 1;
+            let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+            let response = await fetch(url);
+            currentPokemon = await response.json();
+            renderPokemonCards(i);
+            allPokemonsData.push(currentPokemon);
+            pokemonNames.push(currentPokemon.name);
+        }
+    }
 }
 
 
 async function loadPokemonInfo() {
-    for (let i = 0; i < pokemonLimit; i++) {
+    for (let i = startNumber; i < pokemonLimit; i++) {
         id = i + 1;
         let url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
         let secondUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
@@ -37,6 +63,7 @@ async function loadPokemonInfo() {
     }
     renderPokemonInfo(i);
 }
+
 
 function renderPokemonCards(i) {
     let id = i + 1;
@@ -90,7 +117,7 @@ function renderPokemonInfo(i) {
     pokemonNameInfo = allPokemonsDataInfo[i]['name'];
     let changedPokemonName = pokemonNameInfo.charAt(0).toUpperCase() + pokemonNameInfo.slice(1);
     document.getElementById('pokemon-name').innerHTML = changedPokemonName;
-    document.getElementById('pokemon-id').innerHTML = '#' + Number(i+1);
+    document.getElementById('pokemon-id').innerHTML = '#' + Number(i + 1);
     document.getElementById('pokemon-type-info').innerHTML = getPokemonTypes(i);
     document.getElementById('pokemon-height').innerHTML = allPokemonsDataInfo[i].height / 10 + " m";
     document.getElementById('pokemon-weight').innerHTML = allPokemonsDataInfo[i].weight / 10 + " kg";
@@ -102,9 +129,7 @@ function renderPokemonInfo(i) {
 
 
 function loadImages(i) {
-    
     document.getElementById('info-img').src = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
-    
     showNextImage(i);
     showPreviousImage(i);
 }
@@ -113,7 +138,7 @@ function loadImages(i) {
 function showNextImage(i) {
     let firstImage = allPokemonsDataInfo[0]['sprites']['other']['dream_world']['front_default'];
     if (i < allPokemonsDataInfo.length - 1) {
-        document.getElementById('next-img').src = allPokemonsDataInfo[i+1]['sprites']['other']['dream_world']['front_default'];
+        document.getElementById('next-img').src = allPokemonsDataInfo[i + 1]['sprites']['other']['dream_world']['front_default'];
     } else if (i == allPokemonsDataInfo.length - 1) {
         document.getElementById('next-img').src = firstImage;
     }
@@ -123,7 +148,7 @@ function showNextImage(i) {
 function showPreviousImage(i) {
     let lastPicture = allPokemonsDataInfo[allPokemonsDataInfo.length - 1]['sprites']['other']['dream_world']['front_default'];
     if (i > 0) {
-        document.getElementById('previous-img').src = allPokemonsDataInfo[i-1]['sprites']['other']['dream_world']['front_default'];
+        document.getElementById('previous-img').src = allPokemonsDataInfo[i - 1]['sprites']['other']['dream_world']['front_default'];
     } else if (i == 0) {
         document.getElementById('previous-img').src = lastPicture;
     }
@@ -281,8 +306,10 @@ function generateHTML(i) {
                         </div>
                         <div class="info-container-bottom">
                             <div class="abilities-box">
+                                <div>
                                 <b>Abilities:</b><br>
                                 <span id="pokemon-abilities"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -296,3 +323,28 @@ function generateHTML(i) {
         </div>
     `
 }
+/*
+
+function infiniteScroll() {
+    if (Math.floor(window.innerHeight + window.scrollY - 150) > (document.body.offsetHeight - 1000) && scrollLoad) {
+        scrollToLoad = false;
+        loadMorePokemons();
+    }
+}
+
+
+function loadMorePokemons() {
+    if (pokemonData.length < 990) {
+        limit += 30, startNumber = pokemonLimit, pokemonLimit += 30;
+        loadPokemon();
+    }
+}
+
+window.onscroll = function () {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+        if (screen.width >= 1000) {
+            loadMorePokemons();
+        }
+    }
+};
+*/

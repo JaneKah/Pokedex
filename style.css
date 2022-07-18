@@ -260,10 +260,11 @@ input {
 
 .info-img img {
     position: absolute;
-    right: 130px;
+    right: 95px;
     top: -40px;
     height: 200px;
     z-index: 2;
+    width: 250px;
 }
 
 #next-img {
@@ -279,7 +280,7 @@ input {
     height: 100px;
     filter: brightness(20%);
     position: absolute;
-    left: -60px;
+    left: -45px;
 }
 
 .pokemon-card-body-info::before {
@@ -345,7 +346,9 @@ input {
 }
 
 .abilities-box {
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 300px;
     height: 100px;
     background-color: rgba(240, 233, 233, 0.274);
@@ -431,7 +434,6 @@ input {
     cursor: pointer;
 }
 
-
 /*
 .next-img {
     filter: brightness(50%);
@@ -463,11 +465,8 @@ input {
     100% {
         transform: translate(-222px, -66px);
         height: 200px;
-    
     }
-    
 } */
-
 
 @media (max-width: 777px) {
     .pokemon-card {
@@ -502,9 +501,7 @@ input {
     .pokedex-container {
         margin-top: 13em;
     }
-
 }
-
 
 @media (max-width: 520px) {
     .pokedex-info-container {
@@ -517,40 +514,57 @@ input {
         position: relative;
     }
 
-    .info-img img {
-        right: 75px;
-        top: 0px;
-        height: 149px;
-    }
-
     .info-text {
         padding: 1em;
         max-width: 357px;
     }
-
-    .box {
-        width: 140px;
-        height: 45px;
-
-    }
-
+  
     .info-container {
         width: none;
     }
-
-    .progress {
-        width: 130%;
-        min-width: 130%;
+   
+    .info-container-inner {
+        align-items: unset;
     }
 
+    .pokemon-card-body-info::before {
+        bottom: 0px;
+        right: 105px;
+    }
+
+    .info-img img {
+        right: 72px;
+    }
+}
+
+@media (max-width: 465px) {
     .stats {
         width: 200px;
         height: 285px;
     }
 
+    .progress {
+        width: 160%;
+        min-width: 160%;
+    }
+
     .pokemon-card-body-info::before {
-        right: 66px;
         bottom: 0px;
+        right: 76px;
+    }
+}
+
+@media (max-width: 400px) {
+    .info-img img {
+        right: 56px;
+        top: 0px;
+        height: 149px;
+        width: 200px;
+    }
+
+    .box {
+        width: 140px;
+        height: 45px;
     }
 
     .abilities-box {
@@ -558,7 +572,24 @@ input {
         padding: 5px;
     }
 
-    .info-container-inner {
-        align-items: unset;
+    .pokemon-card-body-info::before {
+        right: 66px;
+        bottom: 0px;
+    }
+
+    .stats {
+        width: 200px;
+        height: 285px;
+    }
+
+    .progress {
+        width: 130%;
+        min-width: 130%;
+    }
+}
+
+@media (max-width: 376px) {
+    .dialog-bg {
+        align-items: flex-start;
     }
 }
