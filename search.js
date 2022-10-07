@@ -11,7 +11,7 @@ function renderSearchResult(searchValue) {
     document.getElementById('pokedex-container').innerHTML = '';
     for (let i = 0; i < allPokemonsData.length; i++) {
         if (pokemonNames[i].toUpperCase().includes(searchValue)) {
-            renderPokemonSearchResult(i, i+1, pokemonNames);
+            renderPokemonSearchResult(i, i + 1, pokemonNames);
         }
     }
 }
@@ -46,7 +46,7 @@ function renderPokemonSearchResult(i, id, pokemonNames) {
 
 function loadPokemonTypesForSearchResult(i) {
     let pokemonType = "";
-    let pokemonTypes = allPokemonsData[i].types; 
+    let pokemonTypes = allPokemonsData[i].types;
     for (i = 0; i < pokemonTypes.length; i++) {
         type = pokemonTypes[i].type.name;
         pokemonType += ` <span class="type-info">${type}</span>`;

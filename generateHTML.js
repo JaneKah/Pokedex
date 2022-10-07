@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokedex</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="generateHTML.js"></script>
-    <script src="script.js"></script>
-    <script src="search.js"></script>
-</head>
-
-<body onload="showFirstPokemons(), loadPokemonInfo()">
-
-    <header class="pokemon-header">
-        <div class="pokemon-header-inner">
-            <div class="pokemon-logo"><img src="./img/pokemon-logo.png" alt=""></div>
-            <div class="input"><input type="text" id="search" onclick="showCloseButton()" onchange="searchPokemon()"
-                    placeholder="Find Pokemon"></div>
-        </div>
-    </header>
-    <div id="info-card-container" class="dialog-bg d-none">
-        <div class="pokedex-info-container">
+// generate HTML code for info card
+function generateHTML(i) {
+    let infoCard = document.getElementById('info-card-container');
+    infoCard.innerHTML = `
+    <div class="pokedex-info-container">
             <div id="pokemon-info-card">
                 <div class="pokemon-info-card-top">
                     <div onclick="closeInfoCard()" class="arrow"><img src="./img/arrow.png" alt=""></div>
@@ -35,8 +15,12 @@
                             <span></span>
                         </div>
                     </div>
-                    <img id="previous-img" class="previous-img" onclick="showPreviousPokemon(i)" src="" alt="">
-                    <img id="next-img" onclick="showNextPokemon(i); transformPokemon();" src="" alt="">
+                    <img id="previous-img"  onclick="showPreviousPokemon(${i})"
+                        src=""
+                        alt="">
+                    <img id="next-img" onclick="showNextPokemon(${i})"
+                        src=""
+                        alt="">
                     <div class="info-img ">
                         <img src="" id="info-img" alt="">
                     </div>
@@ -60,22 +44,22 @@
                         <div class="height-weight-container">
                             <div class="box">
                                 <div>
-                                    <span><b>Height:</b></span><br><br>
+                                    <span><b>Height:</b></span><br>
                                     <span id="pokemon-height">10m</span>
                                 </div>
                             </div>
                             <div class="box">
                                 <div>
-                                    <p><b>Weight:</b></p>
-                                    <p id="pokemon-weight"></p>
+                                    <span><b>Weight:</b></span><br>
+                                    <span id="pokemon-weight"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="info-container-bottom">
                             <div class="abilities-box">
                                 <div>
-                                    <span><b>Abilities:</b></span><br>
-                                    <span id="pokemon-abilities"></span>
+                                <b>Abilities:</b><br>
+                                <span id="pokemon-abilities"></span>
                                 </div>
                             </div>
                         </div>
@@ -88,11 +72,24 @@
                 </div>
             </div>
         </div>
+    `
+}
+
+function generateInfoCard(i, id, changedPokemonName, img) {
+   return `<div onclick="openInfoCard(${i})" class="pokemon-card" style="background-color: var(--c-${currentPokemon['types'][0]['type']['name']})" >
+    <div class="pokemon-card-top">
+        <div class="pokemon-id">#${id}</div>
     </div>
-
-    <main>
-        <div id="pokedex-container" class="pokedex-container"></div>
-    </main>
-</body>
-
-</html>
+    <div class="pokemon-card-body">
+        <div class="pokemon-info-left">
+            <span id="pokemon-name">${changedPokemonName}</span>
+            <div class="pokemon-type">
+            ${loadPokemonTypes()}
+            </div>
+        </div>
+        <div class="img-container">
+            <img id="pokemon-img" src="${img}" alt="">
+        </div>
+    </div>
+</div>`
+}
