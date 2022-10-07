@@ -569,7 +569,7 @@ input {
 
     .abilities-box {
         height: 57px;
-        padding: 5px;
+        padding: 10px;
     }
 
     .pokemon-card-body-info::before {

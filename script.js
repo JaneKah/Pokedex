@@ -1,7 +1,7 @@
 let currentPokemon;
 let currentPokemonInfo;
 let currentSpecies;
-let pokemonLimit;
+let pokemonLimit = 30;
 let allPokemonsData = [];
 let allPokomonsSpeciesData = [];
 let allPokemonsDataInfo = [];
@@ -12,43 +12,25 @@ let startNumber = 0;
 let limit = 30;
 let offset = 0;
 let scrollToLoad = true;
-let maxPokemonCount = 90;
+let maxPokemonCount = 990;
+let alreadyLoading = false;
 
-async function loadPokemon() {
-    pokemonLimit = 30;
+
+// render first 30 Pokemons
+async function showFirstPokemons() {
     for (let i = startNumber; i < pokemonLimit; i++) {
         id = i + 1;
         let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
         let response = await fetch(url);
         currentPokemon = await response.json();
-        console.log('Loaded pokemon', currentPokemon);
-        renderPokemonCards(i);
         allPokemonsData.push(currentPokemon);
         pokemonNames.push(currentPokemon.name);
+        renderPokemonCards(i);
     }
     window.addEventListener('scroll', ScrollToMorePokemons);
 }
 
-
-let ScrollToMorePokemons = async () => {
-    if (window.scrollY + window.innerHeight >= document.body.clientHeight) {
-        if (pokemonLimit == maxPokemonCount) {
-            removeEventListener('scroll', ScrollToMorePokemons);
-            return;
-        }
-        for (i = pokemonLimit; i < pokemonLimit + 30; i++) {
-            id = i + 1;
-            let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
-            let response = await fetch(url);
-            currentPokemon = await response.json();
-            renderPokemonCards(i);
-            allPokemonsData.push(currentPokemon);
-            pokemonNames.push(currentPokemon.name);
-        }
-    }
-}
-
-
+// load pokemons data for info cards
 async function loadPokemonInfo() {
     for (let i = startNumber; i < pokemonLimit; i++) {
         id = i + 1;
@@ -60,11 +42,48 @@ async function loadPokemonInfo() {
         currentPokemonInfo = await secondResponse.json();
         allPokomonsSpeciesData.push(currentSpecies);
         allPokemonsDataInfo.push(currentPokemonInfo);
+        renderPokemonInfo(i);
     }
-    renderPokemonInfo(i);
 }
 
 
+let ScrollToMorePokemons = async () => {
+    if (window.scrollY + window.innerHeight >= document.body.clientHeight && !alreadyLoading) {
+        if (pokemonLimit >= maxPokemonCount) {
+            window.removeEventListener('scroll', ScrollToMorePokemons);
+            return;
+        }
+        alreadyLoading = true;
+        for (i = pokemonLimit; i < pokemonLimit + 30; i++) {
+            id = i + 1;
+            let url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+            let response = await fetch(url);
+            currentPokemon = await response.json();
+            allPokemonsData.push(currentPokemon);
+            pokemonNames.push(currentPokemon.name);
+            renderPokemonCards(i);
+        }
+
+        for (let i = pokemonLimit; i < pokemonLimit + 30; i++) {
+            id = i + 1;
+            let url = `https://pokeapi.co/api/v2/pokemon-species/${id}`;
+            let secondUrl = `https://pokeapi.co/api/v2/pokemon/${id}`;
+            let response = await fetch(url);
+            let secondResponse = await fetch(secondUrl);
+            currentSpecies = await response.json();
+            currentPokemonInfo = await secondResponse.json();
+            allPokomonsSpeciesData.push(currentSpecies);
+            allPokemonsDataInfo.push(currentPokemonInfo);
+            renderPokemonInfo(i);
+        }
+
+        pokemonLimit += 30;
+        alreadyLoading = false;
+    }
+}
+
+
+// render pokemon cards 
 function renderPokemonCards(i) {
     let id = i + 1;
     let img = currentPokemon['sprites']['other']['dream_world']['front_default'];
@@ -90,18 +109,18 @@ function renderPokemonCards(i) {
 </div>`
 }
 
-
-
+// render pokemon types from API for pokemon cards in main page
 function loadPokemonTypes() {
     let pokemonType = "";
-    for (i = 0; i < currentPokemon.types.length; i++) {
-        type = currentPokemon['types'][i]['type']['name'];
+    for (j = 0; j < currentPokemon.types.length; j++) {
+        type = currentPokemon['types'][j]['type']['name'];
         pokemonType += ` <span class="type-info">${type}</span>`;
     }
     return pokemonType;
 }
 
 
+//  render pokemon types from API for pokemon more info cards
 function getPokemonTypes(i) {
     let types = allPokemonsDataInfo[i].types;
     let pokemonType = "";
@@ -113,6 +132,7 @@ function getPokemonTypes(i) {
 }
 
 
+//render pokemon info data
 function renderPokemonInfo(i) {
     pokemonNameInfo = allPokemonsDataInfo[i]['name'];
     let changedPokemonName = pokemonNameInfo.charAt(0).toUpperCase() + pokemonNameInfo.slice(1);
@@ -128,6 +148,7 @@ function renderPokemonInfo(i) {
 }
 
 
+// render images for pokemon info card
 function loadImages(i) {
     document.getElementById('info-img').src = allPokemonsDataInfo[i]['sprites']['other']['dream_world']['front_default'];
     showNextImage(i);
@@ -135,6 +156,7 @@ function loadImages(i) {
 }
 
 
+// render image of next pokemon on info card
 function showNextImage(i) {
     let firstImage = allPokemonsDataInfo[0]['sprites']['other']['dream_world']['front_default'];
     if (i < allPokemonsDataInfo.length - 1) {
@@ -145,6 +167,7 @@ function showNextImage(i) {
 }
 
 
+// render image of previous pokemon on info card
 function showPreviousImage(i) {
     let lastPicture = allPokemonsDataInfo[allPokemonsDataInfo.length - 1]['sprites']['other']['dream_world']['front_default'];
     if (i > 0) {
@@ -155,6 +178,7 @@ function showPreviousImage(i) {
 }
 
 
+// show previous pokemon info card
 function showPreviousPokemon(i) {
     if (i > 0) {
         openInfoCard(i - 1);
@@ -164,6 +188,7 @@ function showPreviousPokemon(i) {
 }
 
 
+// show next pokemon info card
 function showNextPokemon(i) {
     if (i < allPokemonsDataInfo.length - 1) {
         openInfoCard(i + 1);
@@ -179,7 +204,7 @@ function transformPokemon() {
 }
 */
 
-
+// render abilities data of pekomon to show on info card 
 function loadAbilities(i) {
     let abilities = "";
     let abilitiesInfo = allPokemonsDataInfo[i].abilities;
@@ -190,7 +215,7 @@ function loadAbilities(i) {
     return abilities;
 }
 
-
+// render statistics of pokemon powers on info card
 function getBaseStats(i) {
     let stats = allPokemonsDataInfo[i].stats;
     let statsNames = ['HP', 'Attack', 'Defense', 'Sp. Atk.', 'Sp. Def.', 'Speed'];
@@ -214,7 +239,7 @@ function getBaseStats(i) {
     return statsContent;
 }
 
-
+// open statistics tab on info card and show it as active tab
 function openBaseStats() {
     document.getElementById('about-tab').classList.remove('active');
     document.getElementById('about-tab').classList.add('inactive');
@@ -224,7 +249,7 @@ function openBaseStats() {
     document.getElementById('base-stats-container').classList.remove('d-none');
 }
 
-
+// open  informaton tab on info card and show it as active tab
 function openInfoAbout() {
     document.getElementById('about-tab').classList.add('active');
     document.getElementById('about-tab').classList.remove('inactive');
@@ -234,20 +259,22 @@ function openInfoAbout() {
     document.getElementById('about-info').classList.remove('d-none');
 }
 
-
+// close info pokemon card
 function closeInfoCard() {
     document.getElementById(`info-card-container`).classList.add('d-none');
+    document.body.style = "overflow: auto"
 }
 
-
+//open info card for more information about pokemon
 function openInfoCard(i) {
     generateHTML(i);
     renderPokemonInfo(i);
     loadImages(i);
+    document.body.style = "overflow: hidden"
     document.getElementById(`info-card-container`).classList.remove('d-none');
 }
 
-
+// generate HTML code for info card
 function generateHTML(i) {
     let infoCard = document.getElementById('info-card-container');
     infoCard.innerHTML = `
@@ -334,10 +361,8 @@ function infiniteScroll() {
 
 
 function loadMorePokemons() {
-    if (pokemonData.length < 990) {
-        limit += 30, startNumber = pokemonLimit, pokemonLimit += 30;
+startNumber = pokemonLimit, pokemonLimit += 30;
         loadPokemon();
-    }
 }
 
 window.onscroll = function () {
@@ -348,3 +373,5 @@ window.onscroll = function () {
     }
 };
 */
+
+
